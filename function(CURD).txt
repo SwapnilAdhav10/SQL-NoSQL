@@ -1,0 +1,59 @@
+## create table using function 
+
+
+create or replace function create_table()
+returns table (id int,name text) as $$
+begin 
+create table student9(id int,name text);
+end;
+$$
+language plpgsql;
+
+select create_table();
+
+------------------------------------------------------------------------------------------------
+
+##insert into table using function
+
+
+create or replace function insert_into_table(a int,b text)
+returns table (id int,name text) as $$
+begin 
+insert into public.student9(id,name) values (a,b);
+end;
+$$
+language plpgsql;
+
+select insert_into_table(1,'sarvesh');
+
+--------------------------------------------------------------------------------------------------
+
+##update into table
+
+create or replace function update_table_name(a text,b int)
+returns table (name text,id int) as $$
+begin 
+update student9 set name=a where student9.id=b;
+end;
+$$
+language plpgsql;
+
+select update_table_name('Prathmesh',4);
+
+--------------------------------------------------------------------------------------------------
+
+##delete from table using function
+
+create or replace function delete_from_table(a int)
+returns table (id int) as $$
+begin 
+delete from student9 where student9.id=a;
+end;
+$$
+language plpgsql;
+
+select delete_from_table(3);
+
+
+------------------------------------------------The End----------------------------------------------
+
