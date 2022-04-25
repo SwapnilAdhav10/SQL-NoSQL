@@ -1,0 +1,133 @@
+Q) what is cassandra
+-> Apache Cassandra is an open source NoSQL distributed database. Cassandra is a peer-to-peer distributed system made up of a cluster of nodes in which any node can accept a read or write request..Its distribution design is based on Amazon’s Dynamo and its data model on Google’s Bigtable.
+
+Q)what do you mean by NoSQL
+->NoSQL, also referred to as “not only SQL”, “non-SQL”, is an approach to database design that enables the storage and querying of data outside the  traditional structures found in relational databases.
+
+Q) What is Cassandra best used for?
+->One open source application, Apache Cassandra, enables organisations to process large volumes of fast moving data in a reliable and scalable way. That's why companies like Facebook, Instagram and Netflix use Apache Cassandra for mission-critical features
+
+Q) What is difference between MongoDB and Cassandra?
+->Cassandra is a column-oriented database. MongoDB stores records in JSON format.
+
+Q)Why is Cassandra NoSQL?
+->A NoSQL, often referred to as “not only SQL”, database is one that stores and retrieves data without requiring data to be stored in tabular format. Unlike relational databases, which require a tabular format, NoSQL databases allow for unstructured data
+
+Q)Is Cassandra same as MySQL?
+->MySQL, as you know, is an RDBMS (Relational Database Management System). Cassandra, however, is a NoSQL database. This means that MySQL will follow more of a master/worker architecture, while Cassandra follows peer-to-peer architecture.
+
+Q)How does Cassandra store data?
+->In Cassandra Data model, Cassandra database stores data via Cassandra Clusters. Clusters are basically the outermost container of the distributed Cassandra database. The database is distributed over several machines operating together. Every machine acts as a node and has their own replica in case of failures.
+
+Q)How does Cassandra store data?
+->In Cassandra Data model, Cassandra database stores data via Cassandra Clusters. Clusters are basically the outermost container of the distributed Cassandra database. The database is distributed over several machines operating together. Every machine acts as a node and has their own replica in case of failures.
+
+Q)what is cassandra cluster
+->A cluster in Cassandra is one of the shells in the whole Cassandra database. Many Cassandra Clusters combine together to form the database in Cassandra. A Cluster is basically the outermost shell or storage unit in a database. The Cassandra Cluster contains many different layers of storage units.
+
+Q)What is architecture of Cassandra?
+->Cassandra has a ring-type architecture. Cassandra has no master nodes and no single point of failure. Cassandra supports network topology with multiple data centers, multiple racks, and nodes. Cassandra read and write processes ensure fast read and write of data.
+
+Q)What is Cassandra data model?
+->Cassandra is a distributed database in which data is partitioned and stored across multiple nodes within a cluster. The partition key is made up of one or more data fields and is used by the partitioner to generate a token via hashing to distribute the data uniformly across a cluster
+
+Q)What is simple strategy in Cassandra?
+->The SimpleStrategy is a basic replication strategy. It's used when using a single datacenter. This method is rack unaware. It places replicas on subsequent nodes in a clockwise order.
+
+Q)How does Cassandra replicate data?
+Cassandra stores data replicas on multiple nodes to ensure reliability and fault tolerance. The replication strategy for each Edge keyspace determines the nodes where replicas are placed. The total number of replicas for a keyspace across a Cassandra cluster is referred to as the keyspace's replication factor.
+
+Q)What are the 4 types of NoSQL databases?
+->Here are the four main types of NoSQL databases:
+  Document databases.
+  Key-value stores.
+  Column-oriented databases.
+  Graph databases.
+
+Q)What is replication factor in cassandra
+->A replication factor of one means that there is only one copy of each row in the Cassandra cluster. A replication factor of two means there are two copies of each row, where each copy is on a different node. All replicas are equally important; there is no primary or master replica.
+
+Q)What is replication strategy in Cassandra?
+->A replication strategy determines the nodes where replicas are placed. Cassandra stores replicas on multiple nodes to ensure reliability and fault tolerance. A replication strategy determines the nodes where replicas are placed. The total number of replicas across the cluster is referred to as the replication factor.
+
+Q)Features of Cassandra
+->Elastic scalability − Cassandra is highly scalable; it allows to add more hardware to accommodate more customers and more data as per requirement.
+  Always on architecture − Cassandra has no single point of failure and it is continuously available for business-critical applications that cannot afford a failure.
+  Fast linear-scale performance − Cassandra is linearly scalable, i.e., it increases your throughput as you increase the number of nodes in the cluster. Therefore it maintains a quick response time.
+  Flexible data storage − Cassandra accommodates all possible data formats including: structured, semi-structured, and unstructured. It can dynamically accommodate changes to your data structures according to your need.
+  Easy data distribution − Cassandra provides the flexibility to distribute data where you need by replicating data across multiple data centers.
+  Transaction support − Cassandra supports properties like Atomicity, Consistency, Isolation, and Durability (ACID).
+  Fast writes − Cassandra was designed to run on cheap commodity hardware. It performs blazingly fast writes and can store hundreds of terabytes of data, without sacrificing the read efficiency.
+
+Note − Cassandra uses the Gossip Protocol in the background to allow the nodes to communicate with each other and detect any faulty nodes in the cluster.
+
+Q)What isGossip protocol?
+-> is a communication protocol that allows state sharing in distributed systems. Most modern systems use this peer-to-peer protocol to disseminate information to all the members in a network or cluster.
+  This protocol is used in a decentralized system that does not have any central node to keep track of all nodes and know if a node is down or not.
+
+Q)What is Commit log
+->The commit log is a crash-recovery mechanism in Cassandra. Every write operation is written to the commit log.
+
+Q)What  is Write operations in cassendra
+->Every write activity of nodes is captured by the commit logs written in the nodes. 
+  Later the data will be captured and stored in the mem-table. 
+  Whenever the mem-table is full, data will be written into the SStable data file. 
+  All writes are automatically partitioned and replicated throughout the cluster. Cassandra periodically consolidates the SSTables, discarding unnecessary data.
+
+Q)what is READ Operations in cassandra
+->During read operations, Cassandra gets values from the mem-table and checks the bloom filter to find the appropriate SSTable that holds the required data.
+
+Q)what is keyspace?
+->It’s like schema
+  A keyspace is an object that is used to hold column families, user defined types. A keyspace is like RDBMS database which contains column families, indexes, user defined types, data center awareness, strategy used in keyspace, replication factor, etc. 
+
+Q)What is cassandra column families
+->Column Family in Cassandra is a collection of rows, which contains ordered columns. They represent a structure of the stored data. These Cassandra Column families are contained in Keyspace. There is at least one Column family in each Keyspace.
+     The rows in each column are once again the collection of many columns. The columns are the basic unit of the data structure in Cassandra. Columns have three values stored in them. They are key or columns name, timestamp and value.
+It increases the efficiency of a program. It groups all the columns used regularly as binds them in a single space.
+
+Q)Cassandra Column family has many attributes some of them are:
+->i. Keys cached
+      Number of locations to keep cached per SSTable.
+  ii. Rows cached
+      A number of rows whose content will be cached in memory.
+  iii. Preload row cache
+      Gives you an option to pre-populate the row cache
+Q)what is keyspace Syntax?
+->Create keyspace KeyspaceName with replicaton={'class':strategy name,'replication_factor': No of replications on different nodes}   
+
+Q)what is Network Topology Strategy?
+->Network Topology Strategy: This strategy is used in the case of more than one data centers. In this strategy, you have to provide replication factor for each data center separately.
+
+Q)create table syntax?
+->CREATE TABLE tablename(  
+   column1 name datatype PRIMARYKEY,  
+   column2 name data type,  
+   column3 name data type.  
+   )  
+
+Q)ALTER TABLE command?
+->ALTER command to perform two types of operations:
+     Add a column->ALTER TABLE table name  ADD new column datatype;
+     Drop a column->ALTER table name  DROP column name;  
+  
+Q)DROP TABLE command?
+->DROP TABLE <tablename>   
+
+Q)insert command
+->INSERT INTO <tablename>  
+(<column1 name>, <column2 name>....)  
+VALUES (<value1>, <value2>....)  
+USING <option>   
+
+Q)update command
+->UPDATE <tablename>  
+SET <column name> = <new value>  
+<column name> = <value>....  
+WHERE <condition> 
+
+Q)read command
+->SELECT FROM <table name> WHERE <condition>;   
+  SELECT * FROM student WHERE student_id=2;  Same  as Postgres SQL
+
+Q)

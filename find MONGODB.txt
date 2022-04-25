@@ -1,0 +1,546 @@
+db.practice.find().pretty();
+{
+        "_id" : ObjectId("6264d80c0004a282ce7a2eaf"),
+        "name" : "Parkishit",
+        "rollno" : 25,
+        "age" : 23,
+        "hobbies" : [
+                "reading",
+                "playing"
+        ],
+        "branch" : "DBDA"
+}
+{
+        "_id" : ObjectId("6264d80c0004a282ce7a2eb0"),
+        "name" : "swpanil",
+        "rollno" : 26,
+        "age" : 24,
+        "hobbies" : [
+                "reading",
+                "dancing"
+        ],
+        "branch" : "DBDA"
+}
+{
+        "_id" : ObjectId("6264d80c0004a282ce7a2eb1"),
+        "name" : "Rahul",
+        "rollno" : 26,
+        "age" : 25,
+        "hobbies" : [
+                "swimming",
+                "playing"
+        ],
+        "branch" : "DBDA"
+}
+{
+        "_id" : ObjectId("6264e0570004a282ce7a2eb2"),
+        "name" : "Swati",
+        "rollno" : 27,
+        "age" : 27,
+        "hobbies" : [
+                {
+                        "1" : "reading"
+                },
+                {
+                        "2" : "playing"
+                }
+        ],
+        "branch" : "DBDA"
+}
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+> db.practice.find({$or:[{name:'Rahul'},{$and:[{name:'Swati'},{rollno:27}]}]},{_id:0}).pretty();
+  
+
+ "name" : "Rahul",
+        "rollno" : 26,
+        "age" : 25,
+        "hobbies" : [
+                "swimming",
+                "playing"
+        ],
+        "branch" : "DBDA"
+}
+{
+        "name" : "Swati",
+        "rollno" : 27,
+        "age" : 27,
+        "hobbies" : [
+                {
+                        "1" : "reading"
+                },
+                {
+                        "2" : "playing"
+                }
+        ],
+        "branch" : "DBDA"
+}
+
+------------------------------------------------------------------------------------------------
+ db.practice.find({$and:[{name:'Swati'},{rollno:27}]},{_id:0}).pretty();
+{
+        "name" : "Swati",
+        "rollno" : 27,
+        "age" : 27,
+        "hobbies" : [
+                {
+                        "1" : "reading"
+                },
+                {
+                        "2" : "playing"
+                }
+        ],
+        "branch" : "DBDA"
+}
+--------------------------------------------------------------------------------------------------
+
+db.practice.find({$or:[{name:'swpanil'},{rollno:27}]},{_id:0}).pretty();
+{
+        "name" : "swpanil",
+        "rollno" : 26,
+        "age" : 24,
+        "hobbies" : [
+                "reading",
+                "dancing"
+        ],
+        "branch" : "DBDA"
+}
+{
+        "name" : "Swati",
+        "rollno" : 27,
+        "age" : 27,
+        "hobbies" : [
+                {
+                        "1" : "reading"
+                },
+                {
+                        "2" : "playing"
+                }
+        ],
+        "branch" : "DBDA"
+----------------------------------------------------------------------------------------------------------------
+
+db.practice.find({age:{$gt:24,$lt:26}},{_id:0}).pretty();
+{
+        "name" : "Rahul",
+        "rollno" : 26,
+        "age" : 25,
+        "hobbies" : [
+                "swimming",
+                "playing"
+        ],
+        "branch" : "DBDA"
+
+----------------------------------------------------------------------------------------------
+ db.practice.find({name:'Swati'},{name:1,rollno:1,'hobbies.1':1,_id:0}).pretty();
+{
+        "name" : "Swati",
+        "rollno" : 27,
+        "hobbies" : [
+                {
+                        "1" : "reading"
+                },
+                {
+
+                }
+        ]
+
+-------------------------------------------------------------------------------------------------------
+
+ db.practice.find({hobbies:'dancing'},{_id:0,'hobbies.$':1});
+{ "hobbies" : [ "dancing" ] }
+
+-------------------------------------------------------------------------------------------------------------------
+
+db.inventory.find().pretty();
+{
+        "_id" : ObjectId("6264ec960004a282ce7a2eb3"),
+        "item" : "Pens",
+        "quantity" : 350,
+        "tags" : [
+                "school",
+                "office"
+        ]
+}
+{
+        "_id" : ObjectId("6264ec960004a282ce7a2eb4"),
+        "item" : "Erasers",
+        "quantity" : 15,
+        "tags" : [
+                "school",
+                "home"
+        ]
+}
+{
+        "_id" : ObjectId("6264ec960004a282ce7a2eb5"),
+        "item" : "Maps",
+        "tags" : [
+                "office",
+                "storage"
+        ]
+}
+{
+        "_id" : ObjectId("6264ec960004a282ce7a2eb6"),
+        "item" : "Books",
+        "quantity" : 5,
+        "tags" : [
+                "school",
+                "storage",
+                "home"
+        ]
+}
+> db.inventory.find({item:{$in:["Pens","Books"]}}).pretty();
+{
+        "_id" : ObjectId("6264ec960004a282ce7a2eb3"),
+        "item" : "Pens",
+        "quantity" : 350,
+        "tags" : [
+                "school",
+                "office"
+        ]
+}
+{
+        "_id" : ObjectId("6264ec960004a282ce7a2eb6"),
+        "item" : "Books",
+        "quantity" : 5,
+        "tags" : [
+                "school",
+                "storage",
+                "home"
+        ]
+
+--------------------------------------------------------------------------------------------
+
+db.practice.find({rollno:{$in:[25,27]},age:{$gt:25,$lt:28}}).pretty();
+{
+        "_id" : ObjectId("6264e0570004a282ce7a2eb2"),
+        "name" : "Swati",
+        "rollno" : 27,
+        "age" : 27,
+        "hobbies" : [
+                {
+                        "1" : "reading"
+                },
+                {
+                        "2" : "playing"
+                }
+        ],
+        "branch" : "DBDA"
+
+=====================================================================================================================================================
+
+db.practice.find({rollno:{$nin:[25,27]},age:{$lt:25}}).pretty();
+{
+        "_id" : ObjectId("6264d80c0004a282ce7a2eb0"),
+        "name" : "swpanil",
+        "rollno" : 26,
+        "age" : 24,
+        "hobbies" : [
+                "reading",
+                "dancing"
+        ],
+        "branch" : "DBDA"
+
+
+db.practice.find({rollno:{$nin:[25,27]},age:{$lte:25}}).pretty();
+{
+        "_id" : ObjectId("6264d80c0004a282ce7a2eb0"),
+        "name" : "swpanil",
+        "rollno" : 26,
+        "age" : 24,
+        "hobbies" : [
+                "reading",
+                "dancing"
+        ],
+        "branch" : "DBDA"
+}
+{
+        "_id" : ObjectId("6264d80c0004a282ce7a2eb1"),
+        "name" : "Rahul",
+        "rollno" : 26,
+        "age" : 25,
+        "hobbies" : [
+                "swimming",
+                "playing"
+        ],
+        "branch" : "DBDA"
+}
+
+------------------------------------------------------------------
+
+db.practice.find({name:'/^R/'},{name:1,_id:0});
+db.practice.find({name:/^R/},{name:1,_id:0});
+{ "name" : "Rahul" }
+
+
+db.practice.find({name:/^R/},{_id:0});
+{ "name" : "Rahul", "rollno" : 26, "age" : 25, "hobbies" : [ "swimming", "playing" ], "branch" : "DBDA" }
+
+
+ db.practice.find({name:/.*a.*/},{name:1,_id:0});
+{ "name" : "Parkishit" }
+{ "name" : "swpanil" }
+{ "name" : "Rahul" }
+{ "name" : "Swati" }
+
+
+db.practice.find({name:/.*pa.*/},{name:1,_id:0});
+{ "name" : "swpanil" }
+
+
+db.practice.find({name:/l$/},{name:1,_id:0});
+{ "name" : "swpanil" }
+{ "name" : "Rahul" }
+
+
+NOTE_ 1) ^ = start with
+
+	  2) .*__.* or /_ / = Inbetwen
+
+	  3) $ = EndWith
+
+--------------------------------------------------------------------------------
+
+db.practice.find({name:/.*a.*/},{name:1,_id:0}).count();
+4
+
+-----------------------------------------------------------------------------------
+
+db.practice.find({name:/.*a.*/},{name:1,_id:0}).sort({'name':1});
+{ "name" : "Parkishit" }
+{ "name" : "Rahul" }
+{ "name" : "Swati" }
+{ "name" : "swpanil" }
+
+
+> db.practice.find({name:/.*a.*/},{name:1,_id:0}).sort({'name':-1});
+{ "name" : "swpanil" }
+{ "name" : "Swati" }
+{ "name" : "Rahul" }
+{ "name" : "Parkishit" }
+
+-----------------------------------------------------------------------------------------------
+
+> db.practice.update({age:23},{$set:{name:'Anushka'}});
+
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+> db.practice.find().pretty();
+{
+        "_id" : ObjectId("6264d80c0004a282ce7a2eaf"),
+        "name" : "Anushka",
+        "rollno" : 25,
+        "age" : 23,
+        "hobbies" : [
+                "reading",
+                "playing"
+        ],
+        "branch" : "DBDA"
+
+---------------------------------------------------------------------------------------------------------------------------
+
+
+db.practice.updateOne({age:27},{$unset:{branch:'DBDA'}});
+
+db.practice.find().pretty();
+
+
+        "_id" : ObjectId("6264e0570004a282ce7a2eb2"),
+        "name" : "Swati",
+        "rollno" : 27,
+        "age" : 27,
+        "hobbies" : [
+                {
+                        "1" : "reading"
+                },
+                "hii",
+                "football"
+        ]
+
+===========================================================================================================================
+
+
+db.practice.deleteOne({age:25},{age:1});
+
+---------------------------------------------------------------------------------------------------------
+
+db.practice.getIndexes();
+[ { "v" : 2, "key" : { "_id" : 1 }, "name" : "_id_" } ]
+
+
+ObjectId("6264e0570004a282ce7a2eb2").getTimestamp()
+ISODate("2022-04-24T05:29:59Z")
+
+
+db.practice.find({age:24}).explain("executionStats")
+
+
+db.practice.find({rollno:26}).explain("executionStats")
+
+
+
+db.practice.find({rollno:26},{name:1,age:1})
+{ "_id" : ObjectId("6264d80c0004a282ce7a2eb0"), "name" : "swpanil", "age" : 24 }
+
+
+
+db.practice.createIndex({hobbies:1},{name:"AAVAD"})
+
+db.practice.getIndexes();
+
+
+ 
+        {
+                "v" : 2,
+                "key" : {
+                        "hobbies" : 1
+                },
+                "name" : "AAVAD"
+        }
+
+db.practice.createIndex({name:1},{background:true})
+
+
+> db.practice.createIndex({name:1},{unique:true})
+
+
+db.practice.dropIndex({hobbies:1})
+
+
+db.practice.getIndexes();
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "rollno" : 1
+                },
+                "name" : "rollno_1"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "age" : -1
+                },
+                "name" : "age_-1"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "name" : 1
+                },
+                "name" : "name_1",
+                "background" : true
+        }
+]
+
+
+db.practice.dropIndexes()
+{
+        "nIndexesWas" : 4,
+        "msg" : "non-_id indexes dropped for collection",
+        "ok" : 1
+}
+
+-------------------------------------------------------------------------------------------------------------
+db.practice.update({name:'avs'},{$set:{branch:'DBDA'}},{upsert:true})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 1,
+        "nModified" : 0,
+        "_id" : ObjectId("626586c9763100f1e6bf9aeb")
+})
+> db.practice.find().pretty()
+{
+        "_id" : ObjectId("6264d80c0004a282ce7a2eaf"),
+        "name" : "Deepika",
+        "rollno" : 25,
+        "age" : 23,
+        "hobbies" : [
+                "reading",
+                "playing",
+                "football"
+        ],
+        "branch" : "DBDA"
+}
+{
+        "_id" : ObjectId("6264d80c0004a282ce7a2eb0"),
+        "name" : "swpanil",
+        "rollno" : 26,
+        "age" : 24,
+        "hobbies" : [
+                "reading",
+                "dancing"
+        ],
+        "branch" : "DBDA"
+}
+{
+        "_id" : ObjectId("6264e0570004a282ce7a2eb2"),
+        "name" : "Swati",
+        "rollno" : 27,
+        "age" : 27,
+        "hobbies" : [
+                {
+                        "1" : "reading"
+                },
+                "hii",
+                "football"
+        ],
+        "address" : "Pune",
+        "branch" : "DBDA"
+----------------------------------------------------------------------------------------------------------------------------------
+
+ db.createCollection("Test",{capped:true,size:1000,max:3})
+{ "ok" : 1 }
+> db.Test.insertMany([{rn:1},{rn:2},{rn:3},{rn:4}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("626589a7f27084690ae9cdcf"),
+                ObjectId("626589a7f27084690ae9cdd0"),
+                ObjectId("626589a7f27084690ae9cdd1"),
+                ObjectId("626589a7f27084690ae9cdd2")
+        ]
+}
+> db.Test.find().pretty()
+{ "_id" : ObjectId("626589a7f27084690ae9cdd0"), "rn" : 2 }
+{ "_id" : ObjectId("626589a7f27084690ae9cdd1"), "rn" : 3 }
+{ "_id" : ObjectId("626589a7f27084690ae9cdd2"), "rn" : 4 }
+
+
+ To give size for existing collections
+
+db.runCommand({"convertToCapped": "mycoll", size: 100000});
+
+
+---------------------------------------------------------------------------------------------------------
+
+db.student.aggregate([ {"$group" :{_id:"$name", count:{$count:{}  }  } ])
+
+db.practice.aggregate([{"$group" : {_id:"$name", count:{$count:{}}}}])
+{ "_id" : "swpanil", "count" : 1 }
+{ "_id" : "Swati", "count" : 1 }
+{ "_id" : "Deepika", "count" : 1 }
+{ "_id" : "avs", "count" : 1 }
+
+> db.practice.aggregate([{"$group" : {_id:"$branch", count:{$count:{}}}}])
+{ "_id" : "DBDA", "count" : 4 }
+
+
+db.practice.aggregate([{"$group" : {_id:"$age", count:{$count:{},{age:{$lt:27}}}}}])
+
+
+
+
+
+
+
+

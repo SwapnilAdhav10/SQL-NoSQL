@@ -1,0 +1,86 @@
+postgres=# table uni;
+ id |  name   | age
+----+---------+-----
+  1 | virat   |  32
+  2 | Rohit   |  33
+  3 | Rahul   |  30
+  4 | Jasprit |  18
+  5 | Shami   |  35
+(5 rows)
+
+
+postgres=# table coll;
+ id | name  | course
+----+-------+--------
+  1 | virat | dbda
+  3 | Rahul | dac
+  5 | Shami | ai
+(3 rows)
+
+
+postgres=# table cls;
+ id |  name   | rollno
+----+---------+--------
+  2 | Rohit   |     10
+  4 | Jasprit |     20
+  5 | Shami   |     30
+(3 rows)
+
+
+postgres=# table markss;
+ rollno | name  | marks
+--------+-------+-------
+     10 | Rohit |   100
+     30 | Shami |    80
+(2 rows)
+
+
+create table uni (id int primary key, name text,age int);
+
+insert into uni values(1,'virat',32),(2,'Rohit',33),(3,'Rahul',30),(4,'Jasprit',18),(5,'Shami',35);
+
+table uni;
+
+
+
+create table coll (id int references uni(id), name text,course text);
+
+
+insert into coll values(1,'virat','dbda'),(3,'Rahul','dac'),(5,'Shami','ai');
+
+table coll;
+
+create table cls (id int references uni(id), name text,rollno int);
+
+insert into cls values (2,'Rohit',10),(4,'Jasprit',20),(5,'Shami',30);
+
+table cls;
+
+create table markss (rollno int references cls(rollno), name text,age int);
+
+insert into markss values (10,'Rohit',100),(30,'Shami',80);
+
+table markss;
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+select u.id,u.name,c.course from uni u join coll c on u.id=c.id;  ----> join on two table
+
+
+select u.id,u.name,c.course from uni u , coll c where u.id=c.id; -------> without join (foreign key)
+
+
+select u.id,u.name,c.course,d.name from coll c join uni u on c.id = u.id join  cls d on d.id = u.id; ------> join on three table
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+select c.id,c.rollno,c.name,d.marks from cls c join markss d on c.rollno = d.rollno where d.marks>80;  ------> join with condition
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+select u.id,u.name,c.course from uni u left join coll c on u.id=c.id; -------> left join
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+

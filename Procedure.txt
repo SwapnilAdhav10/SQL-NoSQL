@@ -1,0 +1,24 @@
+CREATE OR REPLACE PROCEDURE control_transaction()
+LANGUAGE plpgsql AS $$
+DECLARE
+SAL integer=0;
+BEGIN
+  CREATE TABLE test1 (id int,name varchar,salary integer);
+  INSERT INTO test1 VALUES (1,'Akash',2000);
+  INSERT INTO test1 VALUES (2,'Ajay',3000);
+  INSERT INTO test1 VALUES (3,'Swati',1000);
+ 
+  select salary into SAL from test1 where name='Ajay';
+  RAISE NOTICE 'Salary of ajay before update is % at %:  ', SAL, now();
+  Update test1 set salary=5000 where name='Ajay';
+  select salary into SAL from test1 where name='Ajay';
+  RAISE NOTICE 'Salary of ajay after update is % at %:', SAL, now();
+  
+  select salary into SAL from test1 where name='Swati';
+  RAISE NOTICE 'Salary of Swati before delete is % at %:', SAL, now();
+  Delete from test1 where name='Swati';
+  RAISE NOTICE 'deleted swati';
+ 
+ Commit;
+
+END $$;  
